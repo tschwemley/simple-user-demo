@@ -6,6 +6,7 @@ $(document).ready(function(){
       'address1':  $('#inputAddress1').val(),
       'address2':  $('#inputAddress2').val(),
       'city':      $('#inputCity').val(),
+      'state':     $('#inputState').val(),
       'zip':       $('#inputZip').val(),
       'country':   $('#inputCountry').val()
     };
@@ -23,7 +24,7 @@ $(document).ready(function(){
       // Handle the returned data
       .done(function(data) {
         console.log(data);
-        alert('nyx');
+        confirmUser(data);
       });
     }
 
@@ -104,4 +105,12 @@ function addWarnings(str) {
 
 function closeAlert() {
   $('#warning-container').html('');
+}
+
+function confirmUser(json) {
+  var confirmUserHtml = "<legend>Registration Successful</legend>"
+    + json.first_name + " " + json.last_name + " was successfully registered!"
+    + "<p><a href='/'>Click here</a> to register another user.</p>";
+
+  $('.well').html(confirmUserHtml);
 }
