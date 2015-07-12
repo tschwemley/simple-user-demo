@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+
+<body>
+<form class="form-horizontal">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="well bs-component">
+          <fieldset>
+            <legend>User Registration</legend>
+            <div class="form-group">
+              <label for="inputFirstName" class="col-xs-1 control-label">First Name</label>
+              <div class="col-xs-11">
+                <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputLastName" class="col-xs-1 control-label">Last Name</label>
+              <div class="col-xs-11">
+                <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress1" class="col-xs-1 control-label">Address 1</label>
+              <div class="col-xs-11">
+                <input type="text" class="form-control" id="inputAddress1" placeholder="Address 1">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress2" class="col-xs-1 control-label">Address 2</label>
+              <div class="col-xs-11">
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Address 2">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputZip1" class="col-xs-1 control-label">Zip Code</label>
+              <div class="col-xs-7">
+                <input type="text" class="form-control" id="inputZip1">
+              </div>
+              <div class="col-xs-4">
+                <input type="text" class="form-control" id="inputZip2">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputCountry" class="col-xs-1 control-label">Country</label>
+              <div class="col-xs-11">
+                <select class="form-control" id="inputCountry">
+                  <option>United States</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-11 col-xs-offset-1">
+                <button type="submit" class="btn btn-primary">Register</button>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<script src="/javascripts/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+  alert('hello world');
+});
+</script>
+</body>
+</html>
