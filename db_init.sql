@@ -6,7 +6,7 @@ USE user_demo;
 -- Create the users table
 CREATE TABLE IF NOT EXISTS users
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     address1 VARCHAR(255) NOT NULL,
@@ -15,5 +15,6 @@ CREATE TABLE IF NOT EXISTS users
     state VARCHAR(255) NOT NULL,
     zip INT NOT NULL,
     country VARCHAR(255) NOT NULL,
+    created_at DATETIME NOT NULL,
     PRIMARY KEY (id)
 )
