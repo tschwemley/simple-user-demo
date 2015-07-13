@@ -1,5 +1,7 @@
 $(document).ready(function(){
+  // Override default form submission
   $('form').submit(function(event) {
+    // Initialize form data
     var formData = {
       'firstName': $('#inputFirstName').val(),
       'lastName':  $('#inputLastName').val(),
@@ -23,7 +25,6 @@ $(document).ready(function(){
 
       // Handle the returned data
       .done(function(data) {
-        console.log(data);
         confirmUser(data);
       });
     }
@@ -32,9 +33,11 @@ $(document).ready(function(){
   });
 });
 
+/** Validate the user form input **/
 function formValidation(formData) {
   var warnings = '';
 
+  // First name cannot be blank or contain non alpha chars
   if (isAlpha(formData.firstName) === false) {
     if (typeof formData.firstName == 'undefined' || formData.firstName == '') {
       warnings = warnings + generateWarning('First Name', 'cannot be left blank.');
@@ -43,6 +46,7 @@ function formValidation(formData) {
     }
   }
 
+  // Last name cannot be blank or contain non alpha chars
   if (isAlpha(formData.lastName) === false) {
     if (typeof formData.lastName == 'undefined' || formData.lastName == '') {
       warnings = warnings + generateWarning('Last Name', 'cannot be left blank.');
@@ -51,10 +55,12 @@ function formValidation(formData) {
     }
   }
 
+  // Address 1 cannot be blank
   if (typeof formData.address1 == 'undefined' || formData.address1 == '') {
     warnings = warnings + generateWarning('Address 1', 'cannot be left blank.');
   }
 
+  // City cannot be blank or contain non alpha chars
   if (isAlpha(formData.city) === false) {
     if (typeof formData.lastName == 'undefined' || formData.lastName == '') {
       warnings = warnings + generateWarning('City', 'cannot be left blank.');
@@ -63,6 +69,7 @@ function formValidation(formData) {
     }
   }
 
+  // Zip cannot be blank, may only contain numeric characters, and must be 5 or 9 digits long.
   if (isNumeric(formData.zip) === false) {
     if (typeof formData.lastName == 'undefined' || formData.lastName == '') {
       warnings = warnings + generateWarning('Zip Code', 'cannot be left blank.');
@@ -73,6 +80,7 @@ function formValidation(formData) {
     warnings = warnings + generateWarning('Zip Code', 'must be either 5 or 9 digits long.');
   }
 
+  // Add warnings, if any found.
   if (warnings != '') {
     addWarnings(warnings);
     return false;
@@ -81,18 +89,22 @@ function formValidation(formData) {
   }
 }
 
+/** Checks if string contains only alphabetic characters **/
 function isAlpha(str) {
   return /^[a-zA-Z\s()]+$/.test(str);
 }
 
+/** Checks if string only contains numeric characters **/
 function isNumeric(str) {
   return /^[0-9()]+$/.test(str);
 }
 
+/** Generates a warning message **/
 function generateWarning(label, warning) {
   return '<li>' + label + ' ' + warning + '</li>';
 }
 
+/** Adds warning messages to top of user register page *//
 function addWarnings(str) {
   var warningHtml = '<div class="alert alert-dismissible alert-danger">'
     + '<button type="button" class="close" data-dismiss="alert" onclick="closeAlert()">x</button>'
@@ -103,10 +115,12 @@ function addWarnings(str) {
   $('#warning-container').html(warningHtml);
 }
 
+/** Close alert box **/
 function closeAlert() {
   $('#warning-container').html('');
 }
 
+/** Ajax callback for confirming user registration **/
 function confirmUser(json) {
   var confirmUserHtml = "<legend>Registration Successful</legend>"
     + json.first_name + " " + json.last_name + " was successfully registered!"

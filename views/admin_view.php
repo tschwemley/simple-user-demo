@@ -1,8 +1,7 @@
 <html>
 <head>
-    <title>Register</title>
+    <title>User Admin Report</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/main.css">
 </head>
 
 <body>
@@ -49,8 +48,5 @@
       </div>
     </div>
   </div>
-
-  <script src="/javascripts/jquery.min.js"></script>
-  <script src="/javascripts/register-submit.js"></script>
 </body>
 </html>
