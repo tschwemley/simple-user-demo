@@ -10,6 +10,8 @@ class DB
 {
     protected $_db;
 
+    protected $_query;
+
     public function __construct($config = '../db.ini')
     {
         // Get the database config settings
@@ -22,7 +24,7 @@ class DB
                 $dbSettings['password']
             );
         } catch (Exception $e) {
-            echo "Unable to connect: " . $e->getMessage() ."<p>";
+            error_log("DB Wrapper - Unable to connect: " . $e->getMessage());
         }
     }
 
@@ -44,12 +46,47 @@ class DB
 
         // Prepare the insert statement and bind the params
         $stmt = $this->_db->prepare($preparedString);
-        for ($i = 1; $i <= $fieldsSize; ++$i) {
-            $stmt->bindParam($i, $fields[$i-1]);
+        $bindArray = [];
+        foreach($fields as $field) {
+            $bindArray[] = $field;
         }
 
-        var_dump($stmt->execute());
-        exit;
+        $stmt->execute($bindArray);
+    }
+
+    public function select($tableName, $fields)
+    {
+        $selectColumns = $this->_createColumnsString($fields, sizeof($fields), true);
+        $selectQuery = "SELECT {$selectColumns} FROM {$tableName}";
+        $this->_query = $selectQuery;
+
+        return $this;
+    }
+
+    public function orderBy($orderConditions)
+    {
+        $orderConditionsSize = sizeof($orderConditions);
+        $orderStatement = ' ORDER BY';
+
+        for ($i = 0; $i < $orderConditionsSize; ++$i) {
+            $orderStatement .= " {$orderConditions[$i]}";
+            if ($i != ($orderConditionsSize - 1)) {
+                $orderStatement .= ',';
+            }
+        }
+
+        $this->_query .= $orderStatement;
+
+        return $this;
+    }
+
+    public function fetchArray()
+    {
+        $stmt = $this->_db->prepare($this->_query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
     }
 
     /**
@@ -58,16 +95,18 @@ class DB
      * @param array $columnNames an array of column names
      * @param int $n Number of columns to incude in the string
      */
-    private function _createColumnsString($columnNames, $n)
+    private function _createColumnsString($columnNames, $n, $noParantheses=false)
     {
-        $columnString = '(';
+        // Add '(' to beginning of string by default.
+        $columnString = ($noParantheses) ?  '' : '(';
 
         for ($i = 0; $i < $n; ++$i) {
             $columnString .= "{$columnNames[$i]}";
 
             // Determine if end of string or not
             if ($i == ($n - 1)) {
-                $columnString .= ')';
+                // Only add ')' if no parantheses is set to false
+                $columnString .= ($noParantheses) ? '' : ')';
             } else {
                 $columnString .= ', ';
             }

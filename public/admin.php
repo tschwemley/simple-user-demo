@@ -21,5 +21,6 @@ $users = $db->select('users', $selectFields)
     ->orderBy(['created_at DESC'])
     ->fetchArray();
 
-var_dump($users);
-exit;
+include '../views/admin_view.php';
+?>
+
