@@ -1,5 +1,5 @@
 # Simplue User Register Demo
-Simple demo of user registration and an admin report.
+Simple demo of user registration and an admin report. For a live demo check out http://user.tylerschwemley.com
 
 Allows registration of a user and provides an admin report, when requested, of users who were already registered.
 
