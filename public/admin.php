@@ -1,7 +1,6 @@
 <?php
 // Admin report
 
-ini_set('display_errors', 1);
 require_once '../util/DB.php';
 
 $db = new DB();

@@ -104,7 +104,7 @@ function generateWarning(label, warning) {
   return '<li>' + label + ' ' + warning + '</li>';
 }
 
-/** Adds warning messages to top of user register page *//
+/** Adds warning messages to top of user register page **/
 function addWarnings(str) {
   var warningHtml = '<div class="alert alert-dismissible alert-danger">'
     + '<button type="button" class="close" data-dismiss="alert" onclick="closeAlert()">x</button>'
